@@ -1,0 +1,30 @@
+'''
+### UPDATE graph on count change
+@app.callback(Output('bar-graph','figure'),
+              [Input('count-picker','value')])
+def update_graph_count(selected_count):
+    filtered_df = df[df['pt_count']==selected_count]
+    machine_wise_df = df.groupby('pt_mcode', as_index=False)
+    machine_wise_df = machine_wise_df['std_prod','act_prod'].agg(np.sum)
+    for index,row in machine_wise_df.iterrows():
+        graph_data = []
+        trace1 = go.Bar(
+            x=list(machine_wise_df['pt_mcode']),
+            y=list(machine_wise_df['std_prod']),
+            name='Standard'
+            )
+        trace2 = go.Bar(
+            x=list(machine_wise_df['pt_mcode']),
+            y=list(machine_wise_df['act_prod']),
+            name='Actual'
+             )
+        graph_data = [trace1,trace2]
+        graph_layout = go.Layout(
+            barmode='group'
+        )
+    return {
+            'data':graph_data,
+            'layout':graph_layout
+            }
+###
+'''

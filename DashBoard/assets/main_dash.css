@@ -1,0 +1,6 @@
+.main_lnk{
+    position: relative;
+    left: 50px;
+    display: inline-block;
+    text-decoration: none;
+}
